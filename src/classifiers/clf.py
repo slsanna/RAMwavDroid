@@ -32,7 +32,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from pandas.errors import ParserError
-from tqdm import tqdm
+
 from loguru import logger
 
 from sklearn.pipeline import Pipeline
@@ -134,8 +134,8 @@ TEST_SIZE      = 0.20
 RANDOM_STATE   = 42
 MODEL_DIR      = "models"
 SAVE_PLOTS     = False
-RUNS_DIR       = "./runs2/apk_eval"  # each run gets its own subfolder
-LOGS_DIR       = "./logs2"           # root for logs
+RUNS_DIR       = "./runs/apk_eval"  # each run gets its own subfolder
+LOGS_DIR       = "./logs"           # root for logs
 
 # -------------------- LOGGING HELPERS --------------------
 
@@ -244,7 +244,7 @@ def load_benign_and_mal_csvs(sonify: str,
                              csv_mal: Optional[str]) -> Tuple[pd.DataFrame, pd.DataFrame, str, str]:
     son = sonify.lower()
     benign_name = f"benign_dumps_{son}_features.csv"
-    mal_name    = f"dumps_dataset_{son}_features_2.csv"
+    mal_name    = f"dumps_dataset_{son}_features.csv"
 
     benign_path = csv_benign or _find_file(os.path.join(search_root, benign_name)) or _search_csv(benign_name, search_root)
     mal_path    = csv_mal    or _find_file(os.path.join(search_root, mal_name))    or _search_csv(mal_name, search_root)
@@ -370,7 +370,7 @@ def filter_rows_by_maps(df: pd.DataFrame,
     if fill_region:
         df[region_col] = ""
 
-    for apk in tqdm(unique_apks, desc="Filtering APKs (maps.txt)", unit="apk"):
+    for apk in unique_apks:
         addr2desc = _read_maps_cached(apk)
         idxs = df.index[df[apk_col].astype(str) == str(apk)]
 
@@ -611,8 +611,7 @@ def run_hyperparameter_tuning(
         "LogisticRegression": LogisticRegression(random_state=RANDOM_STATE, n_jobs=-1),
         "MLP": MLPClassifier(random_state=RANDOM_STATE),
     }
-    #k_features = min(200, X_train.shape[1])
-    k_features = min(100, X_train.shape[1])
+    k_features = min(200, X_train.shape[1])
 
     for name, clf in model_objs.items():
         with with_model_log(run_dir, sonify, selection_mode, name):
@@ -625,11 +624,9 @@ def run_hyperparameter_tuning(
             search = RandomizedSearchCV(
                 pipe,
                 param_distributions={f'classifier__{k}': v for k, v in param_grids[name].items()},
-                #n_iter=min(5, sum(len(v) for v in param_grids[name].values())),
-                n_iter=2,
+                n_iter=min(5, sum(len(v) for v in param_grids[name].values())),
                 scoring='roc_auc',
-                cv=3,
-                #cv=StratifiedKFold(5, shuffle=True, random_state=RANDOM_STATE),
+                cv=StratifiedKFold(5, shuffle=True, random_state=RANDOM_STATE),
                 n_jobs=cv_jobs,
                 refit=True,
                 random_state=RANDOM_STATE,
@@ -919,7 +916,7 @@ def run_cnn_1d_model(
     sonify: str,
     selection_mode: str,
     run_dir: str,
-    epochs: int = 5,
+    epochs: int = 15,
     batch_size: int = 64,
     lr: float = 1e-3,
     weight_decay: float = 1e-4,
@@ -968,7 +965,7 @@ def main_classify(
     csv_malware: Optional[str] = None,
     cv_jobs: int = 1,
     run_ensemble: bool = True,
-    run_boosting: bool = False,
+    run_boosting: bool = True,
 ):
     """
     Run APK-level classification for the given memory region selection and sonification type.
