@@ -20,7 +20,7 @@ class Sonifier:
         'mp3': (Mp3Sonifier, "Mp3", ".mp3"),
     }
 
-    LEGACY_OUTPUT_ROOT = "/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing/apk"
+    LEGACY_OUTPUT_ROOT = "PATH"
 
     CATEGORY_MAP_TO_GROUP = {
         "Benign": "benign",
@@ -28,8 +28,8 @@ class Sonifier:
         "Banking": "malware",
         "SMS": "malware",
         "Riskware": "malware",
-        "benign_dumps": "benign",
-        "dumps_dataset": "malware",
+        "benign_ram_dumps": "benign",
+        "malware_ram_dumps": "malware",
     }
 
     def __init__(self, sonificationType='wav8', sampleRate=32768, workers=8, datasetType='legacy'):
@@ -49,7 +49,6 @@ class Sonifier:
         # existing
         self.apk_limit = None
 
-        # ✅ NEW: index range control (applies to datasetRAM folder iteration)
         self.start_index = None  # inclusive
         self.end_index = None    # exclusive
 
@@ -101,7 +100,6 @@ class Sonifier:
         if self.apk_limit:
             apkFolders = apkFolders[:self.apk_limit]
 
-        # ✅ NEW: slice by index range (after sort, after limit)
         start = 0 if self.start_index is None else max(0, self.start_index)
         end = len(apkFolders) if self.end_index is None else min(len(apkFolders), self.end_index)
 
@@ -223,7 +221,6 @@ def main():
         sonifier = Sonifier(sonifyType, args.sample_rate, args.workers, args.dataset_type)
         sonifier.apk_limit = args.limit
 
-        # ✅ NEW: pass index range
         sonifier.start_index = args.start
         sonifier.end_index = args.end
 
