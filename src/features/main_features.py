@@ -9,17 +9,17 @@ from extract_features import main
 # Simulate command line arguments
 sys.argv = [
     "extract_features.py",
-    "--data-dir", "/home/ssanna/nas/RAM/Android",
-    "--categories", "benign_dumps", "dumps_dataset",
+    "--data-dir", "PATH",
+    "--categories", "benign_ram_dumps", "malware_ram_dumps",
     "--sonify", "wav8",
     "--analysis-type", "dynamic",
     "--feature-type", "manual",
     "--workers", "8",
 
-    "--start", "500",
-    "--end", "1000",
+    "--start", "0",
+    "--end", "500",
 
-    "--output-dir", "/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing/",
+    "--output-dir", "PATH",
 ]
 
 if __name__ == "__main__":
