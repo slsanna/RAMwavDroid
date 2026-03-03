@@ -11,8 +11,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 from extract_features import main as extract_features_main
 
 # --------- PATHS ----------
-AUDIO_ROOT = Path("/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing/apk")
-FEATURES_ROOT = Path("/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing/features")
+AUDIO_ROOT = Path("PATH")
+FEATURES_ROOT = Path("PATH")
 STAGING_ROOT = FEATURES_ROOT / "_staging_wav_dataset"  # symlink-only staging for extract_features
 
 FINAL_CSV = {
