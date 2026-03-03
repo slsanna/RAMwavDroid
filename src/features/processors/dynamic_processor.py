@@ -299,7 +299,6 @@ class DynamicProcessor:
         if self.limit:
             apkFolders = apkFolders[: self.limit]
 
-        # ✅ apply slice BEFORE resume filtering (your CLI semantics)
         apkFolders = self._apply_slice(apkFolders, start, end)
 
         to_run = []
@@ -336,7 +335,6 @@ class DynamicProcessor:
                 apk_id = os.path.basename(apkFolder)
                 audio_dir = os.path.join(apkFolder, "audio")
 
-                # ✅ case-insensitive mapping of allowed_types against real folder names
                 resolved_allowed = _resolve_allowed_types(audio_dir, allowed_types)
 
                 # If user requested a type but it doesn't exist (case-insensitive), we can skip fast.
@@ -453,9 +451,7 @@ class DynamicProcessor:
             combined.to_csv(outputPath, index=False)
             logging.info(f"Created {outputPath} with {len(combined)} samples")
 
-    # ----------------------------
-    # ✅ Compatibility wrapper
-    # ----------------------------
+
     def run(
         self,
         data_dir: str,
