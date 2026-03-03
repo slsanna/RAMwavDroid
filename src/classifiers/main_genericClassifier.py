@@ -47,12 +47,12 @@ from implementations.classifier_rf import RandomForestTrainer
 # -------------------- CONFIG DEFAULTS --------------------
 
 # Folder that contains your CSVs (we search here if explicit paths not provided)
-CSV_SEARCH_ROOT = "/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing"
+CSV_SEARCH_ROOT = "PATH"
 
 # Dataset root containing benign_dumps/ and dumps_dataset/ with per-APK folders and maps.txt
-ROOT_DIR        = "/mnt/malware_ram/Android"
-BENIGN_DIR_NAME = "benign_dumps"
-MAL_DIR_NAME    = "dumps_dataset"
+ROOT_DIR        = "PATH"
+BENIGN_DIR_NAME = "benign_ram_dumps"
+MAL_DIR_NAME    = "malware_ram_dumps"
 
 # Column defaults (auto-detected if missing)
 TARGET_COL = "category"
