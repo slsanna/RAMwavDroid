@@ -51,7 +51,6 @@ def parseArgs():
     parser.add_argument("--output-dir", default="features", help="Where to store feature CSVs")
     parser.add_argument("--verbose", action="store_true", help="Verbose logging")
 
-    # ✅ NEW: do not recompute
     parser.add_argument(
         "--skip-existing",
         action="store_true",
@@ -162,8 +161,6 @@ def main():
                     args.sonify,
                     output_dir=args.output_dir,
                 )
-
-    # ✅ SKIP-EXISTING MODE:
     # We enumerate APK folders ourselves so we can skip per-APK.
     # Then we invoke processor.run on one index at a time (start=i end=i+1).
     for category in args.categories:
