@@ -5,8 +5,8 @@ Robust APK sonification runner (ancestor-folder aware, no SHA hashing by default
 - Dump trees: /mnt/malware_ram/Android/{benign_dumps,dumps_dataset}
   Dump folder names look like: <hash>.apk_com.pkg_.../
 - APK roots:
-    Benign : /mnt/AndroidProject/DatasetExplainability/labelled/Benign
-    Malware: /mnt/FileSources/VirusTotal/RAM_android2/samples/dataset_apk
+    Benign : PATH
+    Malware: PATH
 
 Matching order per token (lowercased):
   1) Filename-prefix index  (token from APK filename)
@@ -15,7 +15,7 @@ Matching order per token (lowercased):
   4) (Optional) SHA-256 fallback (disabled by default)
 
 Outputs go to:
-  /home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing/apk/{benign,malware}
+  
 
 Python 3.7/3.8 compatible.
 """
@@ -35,14 +35,14 @@ from src.sonification.sonification import Sonifier
 # --------------------------------------------------------
 
 # ---------------- CONFIG ----------------
-BASE_DUMP_DIR = Path("/mnt/malware_ram/Android")
-DUMP_BENIGN = BASE_DUMP_DIR / "benign_dumps"
-DUMP_MALWARE = BASE_DUMP_DIR / "dumps_dataset"
+BASE_DUMP_DIR = Path("PATH")
+DUMP_BENIGN = BASE_DUMP_DIR / "benign_ram_dumps"
+DUMP_MALWARE = BASE_DUMP_DIR / "malware_ram_dumps"
 
-APK_DIR_BENIGN = Path("/mnt/AndroidProject/DatasetExplainability/labelled/Benign")
-APK_DIR_MALWARE = Path("/mnt/FileSources/VirusTotal/RAM_android2/samples/dataset_apk")
+APK_DIR_BENIGN = Path("PATH")
+APK_DIR_MALWARE = Path("PATH")
 
-OUTPUT_ROOT    = Path("/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing/apk")
+OUTPUT_ROOT    = Path("PATH")
 OUTPUT_BENIGN  = OUTPUT_ROOT / "benign"
 OUTPUT_MALWARE = OUTPUT_ROOT / "malware"
 
