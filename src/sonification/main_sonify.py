@@ -9,10 +9,10 @@ from src.sonification.sonification import main
 # Simulate command line arguments
 sys.argv = [
     "sonification.py",
-    "--data-dir", "/home/ssanna/nas/RAM/Android",
-    "--categories", "benign_dumps", "dumps_dataset",
+    "--data-dir", "INPUT_DIR",
+    "--categories", "BENIGN", "MALWARE",
     "--sonify", "wav8",
-    "--dataset-type", "datasetRAM",
+    "--dataset-type", "RAM",
     #"--memory-regions", "all",
     "--workers", "8",
     "--start", "500",
