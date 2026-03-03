@@ -2,7 +2,7 @@
 """
 Robust APK sonification runner (ancestor-folder aware, no SHA hashing by default).
 
-- Dump trees: /mnt/malware_ram/Android/{benign_dumps,dumps_dataset}
+- Dump trees: PATH
   Dump folder names look like: <hash>.apk_com.pkg_.../
 - APK roots:
     Benign : PATH
