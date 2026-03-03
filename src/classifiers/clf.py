@@ -63,11 +63,11 @@ from torch.utils.data import TensorDataset, DataLoader
 # -------------------- CONFIG DEFAULTS --------------------
 warnings.filterwarnings("ignore")
 
-CSV_SEARCH_ROOT = "/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing"
+CSV_SEARCH_ROOT = "PATH"
 
-ROOT_DIR        = "/home/ssanna/nas/RAM/Android"
-BENIGN_DIR_NAME = "benign_dumps"
-MAL_DIR_NAME    = "dumps_dataset"
+ROOT_DIR        = "PATH"
+BENIGN_DIR_NAME = "benign_ram_dumps"
+MAL_DIR_NAME    = "malware_ram_dumps"
 
 TARGET_COL = "category"
 APK_COL    = "apk"            # fallback to 'apk_id'
@@ -637,7 +637,7 @@ def run_hyperparameter_tuning(
             out = os.path.join(MODEL_DIR, name.replace(" ", "") + ".pkl")
             with open(out, 'wb') as f:
                 pickle.dump(best, f)
-            logger.info("✅ Saved {} to {}", name, out)
+            logger.info("Saved {} to {}", name, out)
 
             evaluate_apk(
                 best, X_test, y_test, apk_test,
