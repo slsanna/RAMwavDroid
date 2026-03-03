@@ -56,7 +56,7 @@ from sklearn.discriminant_analysis import QuadraticDiscriminantAnalysis
 
 # -------------------- CONFIG --------------------
 
-BASE_CSV_SEARCH_ROOT = "/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing/features/features"
+BASE_CSV_SEARCH_ROOT = "PATH"
 
 TARGET_COL = "category"   # 0 = benign, 1 = malware
 APK_COL    = "apk"
@@ -503,5 +503,5 @@ if __name__ == "__main__":
     # Example: keep your explicit CSVs if you prefer fixed paths
     main_classify(
         "all", "wav8",
-        csv_benign="/home/ssanna/Desktop/malware_ram/Android/audio/malware-sonification-signal-processing/src/features/features/benign_wav8_features.csv",
-        csv_malware="/home/ssanna/Desktop/malware_ram/Android/audio
+        csv_benign="PATH",
+        csv_malware="PATH")
